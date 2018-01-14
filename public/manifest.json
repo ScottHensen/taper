@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Taper",
+  "name": "Taper's Section interface for archive.org",
   "icons": [
     {
       "src": "favicon.ico",
