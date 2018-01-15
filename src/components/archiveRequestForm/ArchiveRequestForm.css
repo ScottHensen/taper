@@ -1,0 +1,33 @@
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+/* table {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  table-layout: fixed;
+} */
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+th, td {
+  padding: 5px;
+}
+th {
+  text-align: left;
+}
+div {
+  margin: 0;
+  padding: 0;
+}
+.sort-label {
+  width: 20%;
+}
+.sort-input-value {
+  width: 99%
+}
+.submit-button {
+  width: 100%;
+}
