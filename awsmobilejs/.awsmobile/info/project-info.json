@@ -7,16 +7,16 @@
 	"StartCommand": "npm run-script start",
 	"InitializationTime": "2018-01-14-14-48-02",
 	"LastConfigurationTime": "2018-01-14-14-49-36",
-	"LastNPMInstallTime": "2018-01-14-15-09-29",
-	"FrontendLastBuildTime": "2018-01-14-15-40-50",
-	"LastPublishTime": "2018-01-14-15-41-07",
+	"LastNPMInstallTime": "2018-01-15-17-51-16",
+	"FrontendLastBuildTime": "2018-01-15-17-51-59",
+	"LastPublishTime": "2018-01-15-17-52-16",
 	"BackendFormat": "yml",
-	"BackendLastBuildTime": "2018-01-14-15-40-13",
-	"BackendLastUpdateTime": "2018-01-14-15-40-16",
+	"BackendLastBuildTime": "2018-01-15-17-50-44",
+	"BackendLastUpdateTime": "2018-01-15-17-50-47",
 	"BackendLastUpdateSuccessful": true,
 	"BackendProjectID": "7ad2aedf-0e93-41d9-ab6a-a9b4e5c33d92",
 	"BackendProjectName": "taper-2018-01-14-14-49-36",
 	"BackendProjectConsoleUrl": "https://console.aws.amazon.com/mobilehub/home#/7ad2aedf-0e93-41d9-ab6a-a9b4e5c33d92/build",
 	"BackendProjectCreationTime": "2018-01-14T21:49:55.688Z",
-	"BackendProjectLastUpdatedTime": "2018-01-14T22:40:12.833Z"
+	"BackendProjectLastUpdatedTime": "2018-01-16T00:50:43.622Z"
 }
