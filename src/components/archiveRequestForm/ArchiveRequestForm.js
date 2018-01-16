@@ -42,14 +42,18 @@ class ArchiveRequestForm extends React.Component {
        .then(response => {
          // searchResults: response.data
          console.log(response)
-         this.setState({ searchResults : response.data})
+         // const foo = response.response.docs
+         // console.log(foo)
+         this.setState({ searchResults : response.response.docs })
+         console.log('docs', this.state)
+
         })
   }
 
   derCallback(response) {
     console.log('der response', response)
   }
-  
+
   render() {
     return (
       <div className = "archive-request-form">
