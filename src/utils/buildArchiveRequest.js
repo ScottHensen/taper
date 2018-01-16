@@ -19,6 +19,9 @@ const buildArchiveRequest = (input) => {
     request.url = baseUrl.concat(searchParams)
   }
 
+  //temp patch
+  //request.url = 'https://archive.org/advancedsearch.php?q=Grateful+Dead+Iko+Iko+Riverport&fl%5b%5d=dir,title,date,venue,source&rows=50&output=json&callback=dercallback'
+  request.url = 'https://api.archivelab.org/search?q=collection%3A(GratefulDead)'
   return request
 }
 

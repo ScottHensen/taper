@@ -41,11 +41,15 @@ class ArchiveRequestForm extends React.Component {
     xhr.get(url)
        .then(response => {
          // searchResults: response.data
-         this.setState({ searchResults : response.data})
          console.log(response)
+         this.setState({ searchResults : response.data})
         })
   }
 
+  derCallback(response) {
+    console.log('der response', response)
+  }
+  
   render() {
     return (
       <div className = "archive-request-form">
