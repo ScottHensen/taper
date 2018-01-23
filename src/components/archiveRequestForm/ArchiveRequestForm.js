@@ -1,4 +1,5 @@
 import React from 'react'
+import Iframe from 'react-iframe'
 import ArchiveSearchResultArea from '../archiveSearch/ArchiveSearchResultArea'
 import getDataFromTaper from '../../utils/getDataFromTaper'
 import './ArchiveRequestForm.css'
@@ -39,23 +40,26 @@ class ArchiveRequestForm extends React.Component {
     event.preventDefault()
   }
 
-  buildEmbedUrl(soop) {
+  buildEmbedUrl(taperResp) {
     const baseUrl = 'https://archive.org/embed/'
+    const autoplay = '&autoplay=1'
     let i = 0
 
     switch (this.state.selection) {
       case 'last':
-        i = soop.shows.length
+        i = taperResp.shows.length
         break
       case 'random':
-        i = soop.shows.length - 1
+        i = taperResp.shows.length - 1
         break
       default:
         i = 0
     }
 
     console.log('i',i)
-    const url = baseUrl+soop[0].shows[i].identifier
+    const url = baseUrl
+              + taperResp[0].shows[i].identifier
+              + autoplay
     console.log('url',url)
     return url
   }
@@ -104,6 +108,11 @@ class ArchiveRequestForm extends React.Component {
           <input className="submit-button" type="submit" value="Submit Request" />
         </form>
         <br />
+        <Iframe
+            url={this.state.embedUrl}
+            position="relative"
+            display="initial"
+            styles={{height: "25px"}} />
         <p>Embed URL = {this.state.embedUrl}</p>
         <ArchiveSearchResultArea searchResults={outResult}/>
       </div>
