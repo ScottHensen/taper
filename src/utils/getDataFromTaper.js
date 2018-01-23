@@ -7,10 +7,10 @@ async function getDataFromTaper(input) {
     venue:   input.venue,
     isValid: input.band  ? true : false
   }
-  const resp = {
-    request: req,
-    response: {}
-  }
+  // const resp = {
+  //   request: req,
+  //   response: {}
+  // }
   // if (req.isValid) {
   //   getData(req)
   //     .then((data) => {
@@ -27,7 +27,6 @@ async function getDataFromTaper(input) {
 async function getData(request) {
   const apiName = 'bandsCRUD'
   const path    = `/bands/${request.band}`
-  console.log('GET ' + apiName + path)
 
   return await API.get(apiName, path)
 }

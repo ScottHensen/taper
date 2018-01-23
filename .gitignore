@@ -28,4 +28,4 @@ awsmobilejs/.awsmobile/backend-build
 awsmobilejs/\#current-backend-info
 
 #awsmobilejs backend cloud-api dependencies
-/awsmobilejs/backend/cloud-api/taper/node_modules
+/awsmobilejs/backend/cloud-api/*/node_modules

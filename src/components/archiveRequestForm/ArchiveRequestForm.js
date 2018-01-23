@@ -1,11 +1,7 @@
 import React from 'react'
-import buildArchiveRequest from '../../utils/buildArchiveRequest'
 import ArchiveSearchResultArea from '../archiveSearch/ArchiveSearchResultArea'
-import getArchiveSearchResults from '../../utils/getArchiveSearchResults'
 import getDataFromTaper from '../../utils/getDataFromTaper'
-import xhr from '../../utils/xhr'
 import './ArchiveRequestForm.css'
-
 
 class ArchiveRequestForm extends React.Component {
 
@@ -17,12 +13,13 @@ class ArchiveRequestForm extends React.Component {
       date:  '',
       // song:  '',
       venue: '',
-      // searchUrl: '',
-      searchResults: {}
+      selection: 'first',
+      searchResults: [],
+      embedUrl: ''
     }
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.searchArchive = this.searchArchive.bind(this)
+    this.buildEmbedUrl = this.buildEmbedUrl.bind(this)
   }
 
   handleInputChange(event) {
@@ -32,31 +29,40 @@ class ArchiveRequestForm extends React.Component {
   handleSubmit(event) {
     getDataFromTaper(this.state)
       .then((response) => {
-        this.setState({searchResults: response})
+        const url = this.buildEmbedUrl(response)
+        this.setState({
+          searchResults: response,
+          embedUrl: url
+        })
         console.log('state', this.state)
       })
     event.preventDefault()
   }
 
-  searchArchive(url) {
-    xhr.get(url)
-       .then(response => {
-         // searchResults: response.data
-         console.log(response)
-         // const foo = response.response.docs
-         // console.log(foo)
-         this.setState({ searchResults : response.response.docs })
-         console.log('docs', this.state)
+  buildEmbedUrl(soop) {
+    const baseUrl = 'https://archive.org/embed/'
+    let i = 0
 
-        })
-  }
+    switch (this.state.selection) {
+      case 'last':
+        i = soop.shows.length
+        break
+      case 'random':
+        i = soop.shows.length - 1
+        break
+      default:
+        i = 0
+    }
 
-  derCallback(response) {
-    console.log('der response', response)
+    console.log('i',i)
+    const url = baseUrl+soop[0].shows[i].identifier
+    console.log('url',url)
+    return url
   }
 
   render() {
-    var searchResult = this.state.searchResults
+    const outResult = JSON.stringify(this.state.searchResults,undefined,4)
+
     return (
       <div className = "archive-request-form">
         <form onSubmit={this.handleSubmit}>
@@ -98,8 +104,8 @@ class ArchiveRequestForm extends React.Component {
           <input className="submit-button" type="submit" value="Submit Request" />
         </form>
         <br />
-        <p>{this.state.searchUrl}</p>
-        <ArchiveSearchResultArea searchResults={searchResult}/>
+        <p>Embed URL = {this.state.embedUrl}</p>
+        <ArchiveSearchResultArea searchResults={outResult}/>
       </div>
     )
   }

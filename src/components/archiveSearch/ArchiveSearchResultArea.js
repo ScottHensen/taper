@@ -4,9 +4,9 @@ import './ArchiveSearchResultArea.css'
 class ArchiveSearchResultArea extends React.Component {
 
   render() {
+    const textAreaValue = this.props.searchResults
     return (
-      <textarea readOnly rows="20" value = {this.props.searchResults}>
-      </textarea>
+      <textarea value={textAreaValue} rows="20" readOnly />
     )
   }
 }
