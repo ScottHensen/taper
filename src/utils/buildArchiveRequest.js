@@ -4,7 +4,7 @@ const buildArchiveRequest = (input) => {
   const request = {
     band:    validateAndEncodeURIComponent(input.band),
     date:    validateAndEncodeURIComponent(input.date),
-    song:    validateAndEncodeURIComponent(input.song),
+    // song:    validateAndEncodeURIComponent(input.song),
     venue:   validateAndEncodeURIComponent(input.venue),
     isValid: input.band  ? true : false,
     url:     ''
@@ -12,7 +12,8 @@ const buildArchiveRequest = (input) => {
 
   if (request.isValid) {
     const searchParams =
-      [request.band, request.date, request.song, request.venue]
+    // [request.band, request.date, request.song, request.venue]
+      [request.band, request.date, request.venue]
         .filter(n => n)
         .join('%20AND%20')
 

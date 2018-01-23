@@ -7,6 +7,8 @@
 // AWS Mobile Hub Project Constants
 const awsmobile = {
     'aws_app_analytics': 'enable',
+    'aws_cloud_logic': 'enable',
+    'aws_cloud_logic_custom': [{"id":"2m648gw9la","name":"bandsCRUD","description":"","endpoint":"https://2m648gw9la.execute-api.us-east-1.amazonaws.com/Development","region":"us-east-1","paths":["/bands","/bands/123"]}],
     'aws_cognito_identity_pool_id': 'us-east-1:67fbf045-e6c1-49ce-a979-372cea3d3cbe',
     'aws_cognito_region': 'us-east-1',
     'aws_content_delivery': 'enable',
@@ -14,10 +16,15 @@ const awsmobile = {
     'aws_content_delivery_bucket_region': 'us-east-1',
     'aws_content_delivery_cloudfront': 'enable',
     'aws_content_delivery_cloudfront_domain': 'd2bnxzg0969e3w.cloudfront.net',
+    'aws_dynamodb': 'enable',
+    'aws_dynamodb_all_tables_region': 'us-east-1',
+    'aws_dynamodb_table_schemas': [{"tableName":"taper-mobilehub-1249723223-bands","attributes":[{"name":"band","type":"S"},{"name":"name","type":"S"},{"name":"shows","type":"L"}],"indexes":[],"region":"us-east-1","hashKey":"band","rangeKey":"name"}],
     'aws_mobile_analytics_app_id': 'eb2d0cf0c3e34f338e061907bc9497b7',
+    'aws_mobile_analytics_app_region': 'us-east-1',
     'aws_project_id': '7ad2aedf-0e93-41d9-ab6a-a9b4e5c33d92',
     'aws_project_name': 'taper-2018-01-14-14-49-36',
     'aws_project_region': 'us-east-1',
+    'aws_resource_bucket_name': 'taper-deployments-mobilehub-1249723223',
     'aws_resource_name_prefix': 'taper-mobilehub-1249723223',
 }
 

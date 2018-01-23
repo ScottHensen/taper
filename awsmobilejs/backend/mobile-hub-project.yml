@@ -9,6 +9,45 @@ features:
   mobile-analytics: !com.amazonaws.mobilehub.v0.Pinpoint 
     components:
       analytics: !com.amazonaws.mobilehub.v0.PinpointAnalytics {}
-  sign-in: !com.amazonaws.mobilehub.v0.SignIn {}
+  sign-in: !com.amazonaws.mobilehub.v0.SignIn 
+    attributes: {}
+    components: {}
+  database: !com.amazonaws.mobilehub.v0.Database 
+    components:
+      database-nosql: !com.amazonaws.mobilehub.v0.NoSQLDatabase 
+        tables:
+          - !com.amazonaws.mobilehub.v0.NoSQLTable 
+            attributes:
+              shows: L
+            hashKeyName: band
+            hashKeyType: S
+            rangeKeyName: name
+            rangeKeyType: S
+            tableName: ___DYNAMIC_PREFIX___-bands
+            tablePrivacy: public
+            indexes: []
+  cloudlogic: !com.amazonaws.mobilehub.v0.CloudLogic 
+    components:
+      bandsCRUD: !com.amazonaws.mobilehub.v0.API 
+        attributes:
+          name: bandsCRUD
+          requires-signin: false
+        paths:
+          /bands: !com.amazonaws.mobilehub.v0.Function 
+            name: bands
+            codeFilename: uploads/bands-20180120213324.zip
+            handler: lambda.handler
+            enableCORS: true
+            runtime: nodejs6.10
+            environment: {}
+          '/bands/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
+            name: bands
+            codeFilename: uploads/bands-20180120213324.zip
+            handler: lambda.handler
+            enableCORS: true
+            runtime: nodejs6.10
+            environment: {}
 name: taper-2018-01-14-14-49-36
 region: us-east-1
+uploads: []
+sharedComponents: {}

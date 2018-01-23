@@ -1,6 +1,8 @@
 import React from 'react'
 import buildArchiveRequest from '../../utils/buildArchiveRequest'
 import ArchiveSearchResultArea from '../archiveSearch/ArchiveSearchResultArea'
+import getArchiveSearchResults from '../../utils/getArchiveSearchResults'
+import getDataFromTaper from '../../utils/getDataFromTaper'
 import xhr from '../../utils/xhr'
 import './ArchiveRequestForm.css'
 
@@ -13,9 +15,9 @@ class ArchiveRequestForm extends React.Component {
     this.state = {
       band:  '',
       date:  '',
-      song:  '',
+      // song:  '',
       venue: '',
-      searchUrl: '',
+      // searchUrl: '',
       searchResults: {}
     }
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -28,12 +30,11 @@ class ArchiveRequestForm extends React.Component {
   }
 
   handleSubmit(event) {
-    const archiveRequest = buildArchiveRequest(this.state)
-    console.log('returned url = ', archiveRequest.url)
-    if (archiveRequest.isValid) {
-      this.setState({ searchUrl : archiveRequest.url })
-      this.searchArchive(archiveRequest.url)
-    }
+    getDataFromTaper(this.state)
+      .then((response) => {
+        this.setState({searchResults: response})
+        console.log('state', this.state)
+      })
     event.preventDefault()
   }
 
@@ -55,6 +56,7 @@ class ArchiveRequestForm extends React.Component {
   }
 
   render() {
+    var searchResult = this.state.searchResults
     return (
       <div className = "archive-request-form">
         <form onSubmit={this.handleSubmit}>
@@ -83,14 +85,6 @@ class ArchiveRequestForm extends React.Component {
                   onChange={this.handleInputChange} /></td>
               </tr>
               <tr>
-                <td className="sort-label"><label>Song</label></td>
-                <td><input className="sort-input-value"
-                  name="song"
-                  type="text"
-                  value={this.state.song}
-                  onChange={this.handleInputChange} /></td>
-              </tr>
-              <tr>
                 <td className="sort-label"><label>Venue</label></td>
                 <td><input className="sort-input-value"
                   name="venue"
@@ -105,7 +99,7 @@ class ArchiveRequestForm extends React.Component {
         </form>
         <br />
         <p>{this.state.searchUrl}</p>
-        <ArchiveSearchResultArea searchResults={this.state.searchResults}/>
+        <ArchiveSearchResultArea searchResults={searchResult}/>
       </div>
     )
   }
