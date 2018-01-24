@@ -3,8 +3,19 @@ import './SearchResultFilter.css'
 
 class SearchResultFilter extends React.Component {
 
-  handleRadioChange() {
-    console.log('radio wammo')
+  constructor({ initialFilter }) {
+    super()
+    this.state = {
+      selectedFilter: initialFilter
+    }
+
+    this.handleRadioChange = this.handleRadioChange.bind(this)
+  }
+
+  handleRadioChange(event) {
+    const newState = event.target.value
+    this.setState({ selectedFilter : event.target.value })
+    this.props.callbackParent(newState)
   }
 
   render() {
@@ -14,26 +25,8 @@ class SearchResultFilter extends React.Component {
           <li>
             <label>
               <input type="radio"
-                     value="All"
-                     checked="true"
-                     onChange={this.handleRadioChange} />
-              All
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="radio"
-                     value="Random"
-                     checked="false"
-                     onChange={this.handleRadioChange} />
-              Random
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="radio"
-                     value="First"
-                     checked="false"
+                     value="first"
+                     checked={this.state.selectedFilter === 'first'}
                      onChange={this.handleRadioChange} />
               First
             </label>
@@ -41,10 +34,19 @@ class SearchResultFilter extends React.Component {
           <li>
             <label>
               <input type="radio"
-                     value="Last"
-                     checked="false"
+                     value="last"
+                     checked={this.state.selectedFilter === 'last'}
                      onChange={this.handleRadioChange} />
               Last
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio"
+                     value="random"
+                     checked={this.state.selectedFilter === 'random'}
+                     onChange={this.handleRadioChange} />
+              Random
             </label>
           </li>
         </ul>

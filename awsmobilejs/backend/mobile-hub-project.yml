@@ -35,14 +35,14 @@ features:
         paths:
           /bands: !com.amazonaws.mobilehub.v0.Function 
             name: bands
-            codeFilename: uploads/bands-20180120213324.zip
+            codeFilename: uploads/bands-20180122203742.zip
             handler: lambda.handler
             enableCORS: true
             runtime: nodejs6.10
             environment: {}
           '/bands/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
             name: bands
-            codeFilename: uploads/bands-20180120213324.zip
+            codeFilename: uploads/bands-20180122203742.zip
             handler: lambda.handler
             enableCORS: true
             runtime: nodejs6.10

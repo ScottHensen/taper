@@ -1,6 +1,7 @@
 import React from 'react'
 import Iframe from 'react-iframe'
 import ArchiveSearchResultArea from '../archiveSearch/ArchiveSearchResultArea'
+import SearchResultFilter from '../archiveSearch/SearchResultFilter'
 import getDataFromTaper from '../../utils/getDataFromTaper'
 import './ArchiveRequestForm.css'
 
@@ -14,17 +15,22 @@ class ArchiveRequestForm extends React.Component {
       date:  '',
       // song:  '',
       venue: '',
-      selection: 'first',
+      resultFilter: '',
       searchResults: [],
       embedUrl: ''
     }
     this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleFilterChange = this.handleFilterChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.buildEmbedUrl = this.buildEmbedUrl.bind(this)
   }
 
   handleInputChange(event) {
     this.setState({ [event.target.name] : event.target.value })
+  }
+
+  handleFilterChange(newState) {
+    this.setState({ resultFilter : newState })
   }
 
   handleSubmit(event) {
@@ -37,20 +43,21 @@ class ArchiveRequestForm extends React.Component {
         })
         console.log('state', this.state)
       })
+    //TODO: add getUrlFromTaper here.  backend api to do the same thing as above.
     event.preventDefault()
   }
 
   buildEmbedUrl(taperResp) {
     const baseUrl = 'https://archive.org/embed/'
     const autoplay = '&autoplay=1'
+    const numberOfShows = taperResp[0].shows.length
     let i = 0
-
-    switch (this.state.selection) {
+    switch (this.state.resultFilter) {
       case 'last':
-        i = taperResp.shows.length
+        i = numberOfShows - 1
         break
       case 'random':
-        i = taperResp.shows.length - 1
+        i = Math.floor(Math.random() * numberOfShows)
         break
       default:
         i = 0
@@ -104,6 +111,10 @@ class ArchiveRequestForm extends React.Component {
               </tr>
             </tbody>
           </table>
+          <SearchResultFilter
+            initialFilter='first'
+            callbackParent={ (newState) => this.handleFilterChange(newState) } />
+          <p>filter on = {this.state.resultFilter}</p>
           <br />
           <input className="submit-button" type="submit" value="Submit Request" />
         </form>
@@ -112,7 +123,7 @@ class ArchiveRequestForm extends React.Component {
             url={this.state.embedUrl}
             position="relative"
             display="initial"
-            styles={{height: "25px"}} />
+            styles={{height: "30px"}} />
         <p>Embed URL = {this.state.embedUrl}</p>
         <ArchiveSearchResultArea searchResults={outResult}/>
       </div>
